@@ -1,0 +1,70 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Contact List</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">Sections</div>
+                <div class="breadcrumb-item">Contact</div>
+                <div class="breadcrumb-item">Contact List</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <h2 class="section-title">Contact List</h2>
+            <p class="section-lead">Here you can see peoples Enquiries.</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped v_center" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in data %}
+                                        <tr>
+                                            <td>
+                                                {{loop.index}}
+                                            </td>
+                                            <td>{{data[1]}}</td>
+                                            <td>{{data[2]}}</td>
+                                            <td>{{data[3]}}</td>
+                                            <td>{{data[4]}}</td>
+                                            <td>{{data[5]}}</td>                                            
+                                            <td>
+                                                <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                                                    <a href="mailto:{{data[2]}}" class="btn btn-primary">Reply</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+    <!-- END nav -->
+{% block body %}
+	    
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../static/index-assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+	<div class="overlay"></div>
+	<div class="container">
+	  <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+		<div class="col-md-9 ftco-animate pb-5">
+			<p class="breadcrumbs"><span class="mr-2"><a href="{{url_for('index')}}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
+		  <h1 class="mb-3 bread">Choose Your Car</h1>
+		</div>
+	  </div>
+	</div>
+  </section>
+	  
+
+	  <section class="ftco-section bg-light">
+	  <div class="container">
+		  <div class="row">
+			{% for data in data_list %}
+			  <div class="col-md-4">
+				  <div class="car-wrap rounded ftco-animate">
+					  <div class="img rounded d-flex align-items-end" style="background-image: url(../static/uploads/{{data[6]}});">
+					  </div>
+					  <div class="text">
+						  <h2 class="mb-0"><a href="car/{{data[0]}}">{{data[2]}}</a></h2>
+						  <div class="d-flex mb-3">
+							  <span class="cat">{{get_brand(data[1])}}</span>
+							  <p class="price ml-auto">Rs.{{data[3]}} <span>/extra</span></p>
+						  </div>
+						  <p class="d-flex mb-0 d-block"><a href="/booknow/{{data[0]}}" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car/{{data[0]}}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+					  </div>
+				  </div>
+			  </div>
+			  {% endfor %}
+		  </div>
+		  <div class="row mt-5">
+		<div class="col text-center">
+		  <div class="block-27">
+			<ul>
+				{% if total_pages > 1 %}
+				  {% if current_page > 1 %}
+					<li><a href="?page=1">&lt;&lt;</a></li>
+					<li><a href="?page={{ current_page - 1 }}">&lt;</a></li>
+				  {% endif %}
+	
+				  {% for page_num in range(1, total_pages + 1) %}
+					<li {% if page_num == current_page %}class="active"{% endif %}>
+					  <a href="?page={{ page_num }}">{{ page_num }}</a>
+					</li>
+				  {% endfor %}
+	
+				  {% if current_page < total_pages %}
+					<li><a href="?page={{ current_page + 1 }}">&gt;</a></li>
+					<li><a href="?page={{ total_pages }}">&gt;&gt;</a></li>
+				  {% endif %}
+				{% endif %}
+			  </ul>
+		  </div>
+		</div>
+	  </div>
+	  </div>
+  </section>
+{% endblock %}

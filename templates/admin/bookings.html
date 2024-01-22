@@ -1,0 +1,82 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Vehicle Brand List</h1>
+            <a href="{{url_for('addbrand')}}" class="btn btn-primary ml-3">Add New</a>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">Sections</div>
+                <div class="breadcrumb-item">Bookings</div>
+                <div class="breadcrumb-item">Booking List</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <h2 class="section-title">Booking List</h2>
+            <p class="section-lead">Here you can edit, update, and delete your Vehicle.</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped v_center" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th>Car</th>
+                                            <th>Customer</th>
+                                            <th>Departure</th>
+                                            <th>Arrival</th>
+                                            <th>Phone</th>
+                                            <th>Pick_up Date</th>
+                                            <th>Pick_up Time</th>
+                                            <th>Service</th>
+                                            <th>T_Amount</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in data %}
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{ get_result(data[1],'car','name') }}</td>                                    
+                                            <td>{{ get_result(data[2],'user','fullname') }}</td>                                    
+                                            <td>{{ data[3] }}</td>                                    
+                                            <td>{{ data[4] }}</td>                                    
+                                            <td>+92{{ data[5] }}</td>                                    
+                                            <td>{{ data[6] }}</td>                                
+                                            <td>{{ data[7] }}</td>                                
+                                            <td>{{ get_result(data[8],'services','name') }}</td>                                
+                                            <td>{{ data[9] }}</td>                                
+                                            <td><span class="badge badge-primary">{{ data[10] }}</span></td>                                
+                                            <td>{{ data[11] }}</td>                                
+                                            <td>
+                                                <a href="/updatebooking/{{data[0]}}" class="btn btn-success"><i class="fa-solid fa-pencil"></i></a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

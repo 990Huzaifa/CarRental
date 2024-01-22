@@ -1,0 +1,6 @@
+admin:
+	email: admin@gmail.com
+	password: admin123
+user:
+	email: anshkumar@gmail.com
+	password: Demo1234

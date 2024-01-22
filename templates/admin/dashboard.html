@@ -1,0 +1,73 @@
+{% extends 'admin/layout.html' %}
+
+{% block body %}
+
+        <!-- Start app main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-primary">
+                                <i class="far fa-user"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Users</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{user_count}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-danger">
+                                <i class="far fa-newspaper"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Bookings</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{booking_count}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-warning">
+                                <i class="fa-solid fa-images fa-2xl" style="color: #ffffff;"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Car</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{car_count}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fa-solid fa-comment-dots fa-2xl" style="color: #ffffff;"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Queries</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{contact_count}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+            </section>
+        </div>
+
+{% endblock%}

@@ -1,0 +1,140 @@
+{% extends 'layout.html' %}
+{% block body %}
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../static/index-assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+      <div class="col-md-9 ftco-animate pb-5">
+        <p class="breadcrumbs"><span class="mr-2"><a href="{{url_for('index')}}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Sign in <i class="ion-ios-arrow-forward"></i></span></p>
+        <h1 class="mb-3 bread">Account</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section contact-section">
+  <div class="container">
+    <div class="row">
+        <div class="col-12 pb-4">
+          <div style="display: block;" class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="btn btn-primary active" id="v-pills-profile-tab" data-toggle="pill" data-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
+            <button class="btn btn-primary" id="v-pills-bookings-tab" data-toggle="pill" data-target="#v-pills-bookings" type="button" role="tab" aria-controls="v-pills-bookings" aria-selected="true">Bookings</button>
+            <button class="btn btn-primary" id="v-pills-testimonial-tab" data-toggle="pill" data-target="#v-pills-testimonial" type="button" role="tab" aria-controls="v-pills-testimonial" aria-selected="false">Testimonial Post</button>
+            <button class="btn btn-primary" id="v-pills-pass-tab" data-toggle="pill" data-target="#v-pills-pass" type="button" role="tab" aria-controls="v-pills-pass" aria-selected="false">Password Reset</button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <h2>Profile Update</h2>
+                <form action="/editprofile/{{data[0]}}" method="POST" class="bg-light p-5 contact-form">
+                    <div class="row">
+                      <div class="form-group col-sm-12 col-md-6">
+                        <input type="text" value="{{data[1]}}" required class="form-control" name="fullname" placeholder="Fullname">
+                      </div>
+                      <div class="form-group col-sm-12 col-md-6">
+                        <input type="email" value="{{data[2]}}" required class="form-control" name="email" placeholder="Email">
+                      </div>
+                      <div class="form-group col-sm-12 col-md-6">
+                        <input type="tel" value="0{{data[3]}}" required class="form-control" name="phone" placeholder="Phone">
+                      </div>
+                    </div>
+                    <div class="form-group d-block d-sm-flex">
+                      <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
+                      <p class="text-danger pl-4 pt-3">{{msg}}</p>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
+                <h2>Booking History</h2>
+                <table class="table table-hover text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Car</th>
+                        <th scope="col">Departure</th>
+                        <th scope="col">Arrival</th>
+                        <th scope="col">Pickup date</th>
+                        <th scope="col">Pickup Time</th>
+                        <th scope="col">Booking Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in booking_history %}
+                      <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{get_result(booking[1],'car','name')}}</td>
+                        <td>{{booking[3]}}</td>
+                        <td>{{booking[4]}}</td>
+                        <td>{{booking[6]}}</td>
+                        <td>{{booking[7]}}</td>
+                        <td>{{booking[11]}}</td>
+                        <td>{{booking[9]}}</td>
+                        <td >
+                            <p class="badge badge-pill badge-primary">{{booking[10]}}</p>
+                        </td>
+                        <td>{%if booking[10] == 'request': %}
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking{{booking[0]}}">
+                            Cancel
+                          </button>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      <div class="modal fade" id="booking{{booking[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-body text-center">
+                              <p>Are you sure? do you want to cancel this booking</p>
+                              <a href="/cancel/{{booking[0]}}" class="btn btn-warning">Cancel</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-testimonial" role="tabpanel" aria-labelledby="v-pills-testimonial-tab">
+              <h2>Post Testimonial</h2>
+              <form action="/posttestimonial" method="POST" class="bg-light p-5 contact-form">
+                  <div class="row">
+                    <div class="form-group col-sm-12 col-md-6">
+                      <input type="text" value="{{data[1]}}" required class="form-control" name="fullname" placeholder="Fullname">
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6">
+                      <input type="text" value="" required class="form-control" name="occupation" placeholder="Occupation">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <textarea name="message" id="message" required class="form-control" cols="30" rows="4"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group d-block d-sm-flex">
+                    <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
+                    <p class="text-danger pl-4 pt-3">{{msg}}</p>
+                  </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
+              <h2>Reset Password</h2>
+              <form action="/resetpass" method="POST" class="bg-light p-5 contact-form">
+                  <div class="row">
+                    <input type="hidden" name="id" value="{{session['id']}}" id="">
+                    <div class="form-group col-sm-12 col-md-6">
+                      <input type="text" value="" required class="form-control" name="password" placeholder="New Passowrd">
+                    </div>
+                  </div>
+                  <div class="form-group d-block d-sm-flex">
+                    <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
+                    <p class="text-danger pl-4 pt-3">{{msg}}</p>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

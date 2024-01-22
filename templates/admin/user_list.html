@@ -1,0 +1,67 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>User List</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">Sections</div>
+                <div class="breadcrumb-item">User</div>
+                <div class="breadcrumb-item">User List</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <h2 class="section-title">User List</h2>
+            <p class="section-lead">Here you can see the details of register user.</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped v_center" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th>Name</th>
+                                            <th>email</th>
+                                            <th>Phone</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in data %}
+                                        {% if data[5] == 'customer' %}
+                                        
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{ data[1] }}</td>                                      
+                                            <td>{{ data[2] }}</td>                                    
+                                            <td>+92 {{ data[3] }}</td>                                    
+                                            <td>
+                                                    <a href="/deleteuser/{{data[0]}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

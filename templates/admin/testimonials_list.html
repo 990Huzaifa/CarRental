@@ -1,0 +1,67 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Testimonial List</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">Sections</div>
+                <div class="breadcrumb-item">Testimonial</div>
+                <div class="breadcrumb-item">Testimonial List</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <h2 class="section-title">Testimonial List</h2>
+            <p class="section-lead">Here you can see the details of Testimonial.</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped v_center" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th>Name</th>
+                                            <th>Occupation</th>
+                                            <th>Message</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in data %}
+                                        
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{ data[1] }}</td>                                      
+                                            <td>{{ data[2] }}</td>                                    
+                                            <td>{{ data[3] }}</td>                                   
+                                            <td>{{ data[4] }}</td>                                   
+                                            <td>
+                                                    <a href="/managetestimonial/{{data[0]}}" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

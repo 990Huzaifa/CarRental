@@ -1,0 +1,79 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Vehicle List</h1>
+            <a href="{{url_for('addcar')}}" class="btn btn-primary ml-3">Add New</a>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">Sections</div>
+                <div class="breadcrumb-item">Vehicle</div>
+                <div class="breadcrumb-item">Vehicle List</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <h2 class="section-title">Vehicle List</h2>
+            <p class="section-lead">Here you can edit, update, and delete your Vehicle.</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped v_center" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th>Brand</th>
+                                            <th>Name</th>
+                                            <th>Model</th>
+                                            <th>Image</th>
+                                            <th>Seaters</th>
+                                            <th>Extra Charges</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in data_list %}
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{ get_brand(data[1]) }}</td>
+                                            <td>{{ data[2] }}</td>
+                                            <td>{{ data[5] }}</td>
+                                            <td>
+                                                        <img alt="image" src="../../static/uploads/{{ data[6] }}"
+                                                    class="img-fluid" width="55" data-toggle="tooltip"
+                                                    title="{{ data[6] }}">
+                                                    
+                                            </td>
+                                            <td>{{ data[4] }}</td>                                       
+                                            <td>{{ data[3] }}</td>                                       
+                                            <td>
+                                                <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                                                    <a href="/deletecar/{{data[0]}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                    <a href="/editcar/{{data[0]}}" class="btn btn-success"><i class="fa-solid fa-pencil"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
